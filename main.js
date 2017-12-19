@@ -18,20 +18,23 @@ const   { exec }   = require('child_process');
 
 // console.log('after calling readFile');
 
+// Change according to your crediantials.
 var serviceAccount = require(path.join(__dirname, "service.json"));
 
+// Change according to your firebase account.
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://capstone-f2b6f.firebaseio.com"
 });
 
 
-// Get a database reference to our posts
+// Get a database reference to our posts.
 var db = admin.database();
 var refGps = db.ref("copter_location/");
 var refLog = db.ref("LOG/");
 
 
+// Change the string after --connect if required.
 console.log('Starting waypoint Program');
 exec('python '+path.join(__dirname, 'waypoint.py')+' --connect /dev/ttyACM0', (err, stdout, stderr) => {
   if (err) {
@@ -95,8 +98,6 @@ fs.watch(path.join(__dirname, 'status.txt'), 'utf8', function(event,file) {
   }
 });
 
-
-
 fs.watch(path.join(__dirname, 'images/'), 'utf8', function(event,file) {
   if(file.split('.').length==2){ 
     if(fs.existsSync(path.join(__dirname, 'images/')+file)){
@@ -120,3 +121,4 @@ fs.watch(path.join(__dirname, 'images/'), 'utf8', function(event,file) {
     }
   }
 });
+  

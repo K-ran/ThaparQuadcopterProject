@@ -10,6 +10,7 @@ import requests
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
+# Change according to your firebase database. 
 firebase = firebase.FirebaseApplication('https://capstone-f2b6f.firebaseio.com/')
 
 def get_location():
